@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Text</title>
+</head>
+<body>
+    <input type="text" id="textInput">
+    <button onclick="saveText()">Save</button>
+
+    <script>
+        function saveText() {
+            const textInput = document.getElementById('textInput').value;
+            fetch('/api/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text: textInput })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Text saved successfully!');
+                } else {
+                    alert('Error saving text.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
